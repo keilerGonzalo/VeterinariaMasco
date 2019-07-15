@@ -39,7 +39,7 @@
                         </h:panelGrid>
                         <p:commandButton value="Nuevo" action="#{personalBean.limpiar()}" update=":data:datatable,:from"/>
                <p:commandButton rendered="#{!personalBean.banderaSelect}" value="Guardar" action="#{personalBean.guardarPersonal()}" update=":data:datatable,:from"/>
-               <p:commandButton rendered="#{personalBean.banderaSelect}" value="Actualizar" action="#{personalBean.guardarPersonal()}" update=":data:datatable,:from"/>
+               <p:commandButton rendered="#{personalBean.banderaSelect}" value="Actualizar" action="#{personalBean.actualizarPersonal()}" update=":data:datatable,:from"/>
                     </p:panel>
                 </h:form>
                 <p:panel>

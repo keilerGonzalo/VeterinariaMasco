@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24/06/2019 07:58:37 PM by Hibernate Tools 4.3.1
+// Generated 17/07/2019 06:49:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,9 +10,10 @@ import java.util.Date;
 public class Atencion  implements java.io.Serializable {
 
 
-     private int idAtencion;
+     private Integer idAtencion;
      private Clientepormascota clientepormascota;
      private Personal personal;
+     private Tipoatencion tipoatencion;
      private Date fechaAtencion;
      private String diagnostico;
      private Date horaAtencion;
@@ -20,20 +21,20 @@ public class Atencion  implements java.io.Serializable {
     public Atencion() {
     }
 
-    public Atencion(int idAtencion, Clientepormascota clientepormascota, Personal personal, Date fechaAtencion, String diagnostico, Date horaAtencion) {
-       this.idAtencion = idAtencion;
+    public Atencion(Clientepormascota clientepormascota, Personal personal, Tipoatencion tipoatencion, Date fechaAtencion, String diagnostico, Date horaAtencion) {
        this.clientepormascota = clientepormascota;
        this.personal = personal;
+       this.tipoatencion = tipoatencion;
        this.fechaAtencion = fechaAtencion;
        this.diagnostico = diagnostico;
        this.horaAtencion = horaAtencion;
     }
    
-    public int getIdAtencion() {
+    public Integer getIdAtencion() {
         return this.idAtencion;
     }
     
-    public void setIdAtencion(int idAtencion) {
+    public void setIdAtencion(Integer idAtencion) {
         this.idAtencion = idAtencion;
     }
     public Clientepormascota getClientepormascota() {
@@ -49,6 +50,13 @@ public class Atencion  implements java.io.Serializable {
     
     public void setPersonal(Personal personal) {
         this.personal = personal;
+    }
+    public Tipoatencion getTipoatencion() {
+        return this.tipoatencion;
+    }
+    
+    public void setTipoatencion(Tipoatencion tipoatencion) {
+        this.tipoatencion = tipoatencion;
     }
     public Date getFechaAtencion() {
         return this.fechaAtencion;

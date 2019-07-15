@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24/06/2019 07:58:37 PM by Hibernate Tools 4.3.1
+// Generated 17/07/2019 06:49:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,20 +14,20 @@ public class Clientepormascota  implements java.io.Serializable {
      private ClientepormascotaId id;
      private Cliente cliente;
      private Mascota mascota;
-     private String estado;
+     private char estado;
      private Set atencions = new HashSet(0);
 
     public Clientepormascota() {
     }
 
 	
-    public Clientepormascota(ClientepormascotaId id, Cliente cliente, Mascota mascota, String estado) {
+    public Clientepormascota(ClientepormascotaId id, Cliente cliente, Mascota mascota, char estado) {
         this.id = id;
         this.cliente = cliente;
         this.mascota = mascota;
         this.estado = estado;
     }
-    public Clientepormascota(ClientepormascotaId id, Cliente cliente, Mascota mascota, String estado, Set atencions) {
+    public Clientepormascota(ClientepormascotaId id, Cliente cliente, Mascota mascota, char estado, Set atencions) {
        this.id = id;
        this.cliente = cliente;
        this.mascota = mascota;
@@ -56,11 +56,11 @@ public class Clientepormascota  implements java.io.Serializable {
     public void setMascota(Mascota mascota) {
         this.mascota = mascota;
     }
-    public String getEstado() {
+    public char getEstado() {
         return this.estado;
     }
     
-    public void setEstado(String estado) {
+    public void setEstado(char estado) {
         this.estado = estado;
     }
     public Set getAtencions() {

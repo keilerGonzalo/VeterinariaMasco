@@ -63,6 +63,40 @@ public class MascotaPorClienteBean {
          dao.guardarClientepormascota(mascotaporcliente);
          return "/RegistroMascotaPorCliente";
    }
+       public String actualizar() {
+        try {
+            MascotaporClienteDao mascotaporclienteDao = new MascotaporClienteDao();
+            boolean respuesta = mascotaporclienteDao.actualizarClientepormascota(mascotaporcliente);
+            if (respuesta){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se actualizo con exito"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se puedo actualizar"));
+            }
+        } catch (HibernateException e) {
+            ///transation.rollback();  -- regresa a la anterior
+            System.out.println("Error::: " + e);
+        }
+        return "/RegistroMascota";
+
+    }
+
+    public ArrayList<Clientepormascota> listar() {
+        ArrayList<Clientepormascota> lista = new ArrayList<>();
+        MascotaporClienteDao mascotaporclienteDao = new MascotaporClienteDao();
+        lista = mascotaporclienteDao.listarClientepormascota();
+        return lista;
+    }
+
+    public String eliminar() {
+       MascotaporClienteDao mascotaporclienteDao = new MascotaporClienteDao();
+        boolean respuesta = mascotaporclienteDao.eliminarClientepormascota(mascotaporcliente);
+        if (respuesta) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se elimino con exito"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se puedo eliminar"));
+        }
+        return "/RegistroMascota";
+    }
    
     public ArrayList getListaclientes() {
         return listaclientes;

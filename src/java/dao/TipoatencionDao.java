@@ -1,7 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dao;
 
-import entidades.Atencion;
-import interfaces.IAtencion;
+import entidades.Tipoatencion;
+import interfaces.ITipoatencion;
 import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,19 +17,15 @@ import utilitarios.HibernateUtil;
  *
  * @author USUARIO
  */
-public class AtencionDao implements IAtencion{
-
-     //funcion para guardar
-    @Override
-    public boolean guardarAtencion(Atencion atencion) {
+public class TipoatencionDao implements ITipoatencion{
+     @Override
+    public boolean guardarTipoatencion(Tipoatencion tipoatencion) {
         Session session = null;
         boolean respuesta = true;
         try {
-            //construir una nueva session y transaccion
             session = HibernateUtil.getSessionFactory().openSession();
             Transaction transaccion = session.beginTransaction(); //inicia
-            //registra en la base de datos
-            session.save(atencion);
+            session.save(tipoatencion);
             transaccion.commit();
         } catch (Exception e) {
             System.out.println("Error al guardar. " + e);
@@ -37,18 +38,15 @@ public class AtencionDao implements IAtencion{
         return respuesta;
     }
 
-    //funcion para listar
     @Override
-    public ArrayList<Atencion> listarAtenciones() {
+    public ArrayList<Tipoatencion> listarTipoatencion() {
         Session session = null;
-        ArrayList<Atencion> lista = new ArrayList<>();
+        ArrayList<Tipoatencion> lista = new ArrayList<>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            //consulta hacia la base de datos
-            String hql = "FROM Atencion";
+            String hql = "FROM Tipoatencion";
             Query query = session.createQuery(hql);
-            //ejecuta la consulta y obtener la lista. array: castea
-            lista = (ArrayList<Atencion>) query.list();
+            lista = (ArrayList<Tipoatencion>) query.list();
         } catch (Exception e) {
             System.out.println("ERROR EN LISTAR::" + e);
         } finally {
@@ -61,14 +59,14 @@ public class AtencionDao implements IAtencion{
     }
 
     @Override
-    public boolean actualizarAtencion(Atencion atencion) {
-     
+    public boolean actualizarTipoatencion(Tipoatencion tipoatencion) {
+
         boolean resp = true;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Transaction transaccion = session.beginTransaction();
-            session.update(atencion);
+            session.update(tipoatencion);
             transaccion.commit();
         } catch (Exception e) {
             resp = false;
@@ -82,13 +80,13 @@ public class AtencionDao implements IAtencion{
     }
 
     @Override
-    public boolean eliminarAtencion(Atencion atencion) {
+    public boolean eliminarTipoatencion(Tipoatencion tipoatencion) {
         Session sesion = null;
         boolean resp = true;
         try {
             sesion = HibernateUtil.getSessionFactory().openSession();
             sesion.beginTransaction();
-            sesion.delete(atencion);
+            sesion.delete(tipoatencion);
             sesion.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("ERROR DAO::" + e);

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/06/2019 07:58:38 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17/07/2019 06:49:39 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Atencion" table="atencion" catalog="mascota" optimistic-lock="version">
-        <id name="idAtencion" type="int">
+        <id name="idAtencion" type="java.lang.Integer">
             <column name="idAtencion" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="clientepormascota" class="entidades.Clientepormascota" fetch="select">
             <column name="idCliente" not-null="true" />
@@ -14,6 +14,9 @@
         </many-to-one>
         <many-to-one name="personal" class="entidades.Personal" fetch="select">
             <column name="idPersonal" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoatencion" class="entidades.Tipoatencion" fetch="select">
+            <column name="idTipoAtencion" not-null="true" />
         </many-to-one>
         <property name="fechaAtencion" type="date">
             <column name="fechaAtencion" length="10" not-null="true" />

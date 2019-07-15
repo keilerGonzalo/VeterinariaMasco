@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package managedBean;
 
+package managedBean;
 import dao.AtencionDao;
 import dao.ClienteDao;
 import dao.MascotaDao;
 import dao.PersonalDao;
+import dao.TipoatencionDao;
 import entidades.Atencion;
-import entidades.Cliente;
 import entidades.Clientepormascota;
 import entidades.ClientepormascotaId;
 import entidades.Personal;
+import entidades.Tipoatencion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
@@ -39,17 +35,23 @@ public class AtencionBean implements Serializable{
     private ArrayList listamascotas;
     private int idMascota;
     
+      private Personal personal;
     private ArrayList listapersonales; 
      private int idPersonal;
      
+      private Tipoatencion tipoatencion;
+    private ArrayList listatipoatenciones; 
+     private int idTipoAtencion;
      
-  
+     
+ 
     private Clientepormascota mascotaporcliente;
-    private Personal personal;
     private ClientepormascotaId mascotaporclienteid;
     
     public AtencionBean(){
-        this.atencion = new Atencion();
+       atencion = new Atencion();
+       personal = new Personal();
+       tipoatencion = new Tipoatencion();
        listaclientes = new ArrayList();
        listamascotas = new ArrayList();
        listapersonales = new ArrayList();
@@ -64,9 +66,11 @@ public class AtencionBean implements Serializable{
       ClienteDao clientedao= new ClienteDao();
       MascotaDao mascotadao = new MascotaDao();
       PersonalDao personaldao = new PersonalDao();
+      TipoatencionDao tipoatenciondao = new TipoatencionDao();
        listaclientes = clientedao.listarCliente();
        listamascotas = mascotadao.listarMascotas();
        listapersonales = personaldao.listarPersonal();
+       listatipoatenciones = tipoatenciondao.listarTipoatencion();
    }
  
     public Atencion getAtencion() {
@@ -79,13 +83,14 @@ public class AtencionBean implements Serializable{
 
     public String guardarAtencion() {
         try {
-
             AtencionDao atencionDao = new AtencionDao();
-            
-            mascotaporclienteid.setClienteIdCliente(idCliente);
-            mascotaporclienteid.setMascotaIdMascota(idMascota);
-            personal.setIdPersonal(idPersonal);
             mascotaporcliente.setId(mascotaporclienteid);
+            personal.setIdPersonal(idPersonal);
+            tipoatencion.setIdTipoAtencion(idTipoAtencion);
+            atencion.setClientepormascota(mascotaporcliente);
+            atencion.setPersonal(personal);
+            atencion.setTipoatencion(tipoatencion);
+            atencion.setClientepormascota(mascotaporcliente);
             boolean respuesta = atencionDao.guardarAtencion(atencion);
             if (respuesta) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se registro con éxito"));
@@ -133,11 +138,11 @@ public class AtencionBean implements Serializable{
         }
         return "/RegistroAtencion";
     }
+
     public String limpiar() {
-        banderaSelect=false;
         return "/RegistroAtencion";
     }
-   public void selectBandera(){
+    public void selectBandera(){
     banderaSelect=true;
    }
 
@@ -178,7 +183,15 @@ public class AtencionBean implements Serializable{
     }
 
     public void setIdMascota(int idMascota) {
-        this.idMascota = idMascota; 
+        this.idMascota = idMascota;
+    }
+
+    public Personal getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
 
     public ArrayList getListapersonales() {
@@ -212,4 +225,30 @@ public class AtencionBean implements Serializable{
     public void setMascotaporclienteid(ClientepormascotaId mascotaporclienteid) {
         this.mascotaporclienteid = mascotaporclienteid;
     }
+
+    public Tipoatencion getTipoatencion() {
+        return tipoatencion;
+    }
+
+    public void setTipoatencion(Tipoatencion tipoatencion) {
+        this.tipoatencion = tipoatencion;
+    }
+
+    public ArrayList getListatipoatenciones() {
+        return listatipoatenciones;
+    }
+
+    public void setListatipoatenciones(ArrayList listatipoatenciones) {
+        this.listatipoatenciones = listatipoatenciones;
+    }
+
+    public int getIdTipoAtencion() {
+        return idTipoAtencion;
+    }
+
+    public void setIdTipoAtencion(int idTipoAtencion) {
+        this.idTipoAtencion = idTipoAtencion;
+    }
+
+    
 }
