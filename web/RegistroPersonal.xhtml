@@ -22,8 +22,7 @@
                             </column>
                         </f:facet>
                         <h:panelGrid columns="2">
-
-                            <p:outputLabel value="Codigo"/>
+                            <p:outputLabel value="codigo"/>
                             <p:inputText value="#{personalBean.personal.idPersonal}" required="true"/>
                             <p:outputLabel value="Nombre Personal"/>
                             <p:inputText value="#{personalBean.personal.nombre}"/>
@@ -38,15 +37,16 @@
                             <p:outputLabel value="Email"/>
                             <p:inputText value="#{personalBean.personal.email}"/>
                         </h:panelGrid>
-                        <p:commandButton value="Guardar" action="#{personalBean.guardarPersonal()}" update=":data:datatable,:from"/>
-                        <p:commandButton value="Actualizar" action="#{personalBean.actualizarPersonal()}" update=":data:datatable,:from"/>
+                        <p:commandButton value="Nuevo" action="#{personalBean.limpiar()}" update=":data:datatable,:from"/>
+               <p:commandButton rendered="#{!personalBean.banderaSelect}" value="Guardar" action="#{personalBean.guardarPersonal()}" update=":data:datatable,:from"/>
+               <p:commandButton rendered="#{personalBean.banderaSelect}" value="Actualizar" action="#{personalBean.guardarPersonal()}" update=":data:datatable,:from"/>
                     </p:panel>
                 </h:form>
                 <p:panel>
                     <h:form id="data">
                         <p:dataTable rowKey="#{personal.idPersonal}" selection="#{personalBean.personal}" selectionMode="single" 
                                      id="datatable" var="personal" value="#{personalBean.listarPersonals()}">
-                            <p:ajax update=":from" event="rowSelect" />
+                            <p:ajax update=":from" event="rowSelect" listener="#{personalBean.selectBandera()}"/>
                             <p:column headerText="Codigo">
                                 <h:outputText value="#{personal.idPersonal}"/>
                             </p:column>
@@ -67,7 +67,6 @@
                                     <f:setPropertyActionListener target="#{personalBean.personal}" value="#{personal}" />
                                 </p:commandButton>
                             </p:column>
-
                         </p:dataTable>
                     </h:form>
                 </p:panel>

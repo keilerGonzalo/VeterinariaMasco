@@ -7,7 +7,7 @@ package prueba;
 
 import dao.MascotaDao;
 import entidades.Mascota;
-import managedBean.MascotaBean;
+import managedBean.MascotaPorClienteBean;
 
 /**
  *

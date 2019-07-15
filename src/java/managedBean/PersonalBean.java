@@ -24,7 +24,8 @@ import org.hibernate.HibernateException;
 public class PersonalBean implements Serializable{
     
     private Personal personal;
-
+   private boolean banderaSelect=false;
+   
     public PersonalBean() {
         this.personal = new Personal();
     }
@@ -87,5 +88,20 @@ public class PersonalBean implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se puedo eliminar"));
         }
         return "/RegistroPersonal";
+    }
+    public String limpiar() {
+        banderaSelect=false;
+        return "/RegistroPersonal";
+    }
+   public void selectBandera(){
+    banderaSelect=true;
+   }
+
+    public boolean isBanderaSelect() {
+        return banderaSelect;
+    }
+
+    public void setBanderaSelect(boolean banderaSelect) {
+        this.banderaSelect = banderaSelect;
     }
 }

@@ -26,6 +26,7 @@ import org.hibernate.HibernateException;
 public class MascotaBean implements Serializable {
 
     private Mascota mascota;
+    private boolean banderaSelect=false;
 
     public MascotaBean() {
         this.mascota = new Mascota();
@@ -93,7 +94,18 @@ public class MascotaBean implements Serializable {
     }
 
     public String limpiar() {
+        banderaSelect=false;
         return "/RegistroMascota";
+    }
+   public void selectBandera(){
+    banderaSelect=true;
+   }
+    public boolean isBanderaSelect() {
+        return banderaSelect;
+    }
+
+    public void setBanderaSelect(boolean banderaSelect) {
+        this.banderaSelect = banderaSelect;
     }
 
 }

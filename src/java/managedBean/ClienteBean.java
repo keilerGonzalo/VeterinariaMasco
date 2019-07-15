@@ -43,7 +43,7 @@ public class ClienteBean implements Serializable {
             ClienteDao clienteDao = new ClienteDao();
             boolean respuesta = clienteDao.guardarCliente(cliente);
             if (respuesta) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se regidtro correctamente"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se registro correctamente"));
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se puedo registrar"));
             }

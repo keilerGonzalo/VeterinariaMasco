@@ -21,7 +21,6 @@
                             </column>
                         </f:facet>
                         <h:panelGrid columns="2">
-
                             <p:outputLabel value="Id"/>
                             <p:inputText value="#{mascotaBean.mascota.idMascota}" required="true"/>
                             <p:outputLabel value="Nombre Mascota"/>
@@ -31,15 +30,16 @@
                             <p:outputLabel value="Raza"/>
                             <p:inputText value="#{mascotaBean.mascota.raza}"/>
                         </h:panelGrid>
-                        <p:commandButton value="Guardar" action="#{mascotaBean.guardarMascota()}" update=":data:datatable,:from"/>
-                        <p:commandButton value="Actualizar" action="#{mascotaBean.actualizarMascota()}" update=":data:datatable,:from"/>
+                        <p:commandButton value="Nuevo" action="#{mascotaBean.limpiar()}" update=":data:datatable,:from"/>
+                        <p:commandButton rendered="#{!mascotaBean.banderaSelect}" value="Guardar" action="#{mascotaBean.guardarMascota()}" update=":data:datatable,:from"/>
+                        <p:commandButton rendered="#{mascotaBean.banderaSelect}" value="Actualizar" action="#{mascotaBean.actualizarMascota()}" update=":data:datatable,:from"/>
                     </p:panel>
                 </h:form>
                 <p:panel>
                     <h:form id="data">
                         <p:dataTable rowKey="#{mascota.idMascota}" selection="#{mascotaBean.mascota}" selectionMode="single" 
                                      id="datatable" var="mascota" value="#{mascotaBean.listarMascotas()}">
-                            <p:ajax update=":from" event="rowSelect" />
+                            <p:ajax update=":from" event="rowSelect" listener="#{mascotaBean.selectBandera()}"/>
                             <p:column headerText="Codigo">
                                 <h:outputText value="#{mascota.idMascota}"/>
                             </p:column>
